@@ -327,11 +327,24 @@ def run_econometric_model(task: TaskConfig, df: pd.DataFrame, model_id: str):
     train_data = train_df.iloc[train_idx]
     test_data = train_df.iloc[test_idx]
 
-    model = smf.ols(formula=formula, data=train_data)
+        model = smf.ols(formula=formula, data=train_data)
     res = model.fit()
 
+    # --- Robust prediction step to avoid Patsy category mismatches ---
+    try:
+        y_pred = res.predict(test_data)
+    except Exception:
+        # Align categorical levels between train and test
+        test_aligned = test_data.copy()
+        for col in ["county", "nuts3", "year"]:
+            if col in test_aligned.columns and col in train_data.columns:
+                test_aligned[col] = pd.Categorical(
+                    test_aligned[col],
+                    categories=train_data[col].unique()
+                )
+        y_pred = res.predict(test_aligned)
+
     y_test = test_data[target].values
-    y_pred = res.predict(test_data)
     ss_res = float(np.sum((y_test - y_pred) ** 2))
     ss_tot = float(np.sum((y_test - np.mean(y_test)) ** 2))
     r2_test = 1.0 - ss_res / ss_tot if ss_tot > 0 else 0.0
