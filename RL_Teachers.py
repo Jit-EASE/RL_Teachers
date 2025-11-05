@@ -297,7 +297,7 @@ def run_econometric_model(task: TaskConfig, df: pd.DataFrame, model_id: str):
     if model_id == "ECM":
         df_ecm = build_ecm_df(task, df)
         if df_ecm.empty:
-            # Fall back to pooled if ECM no data
+            # Fall back to pooled if ECM has no usable data
             formula = make_formula("POOL_OLS", task)
             train_df = df
             target = task.y_var
@@ -327,7 +327,8 @@ def run_econometric_model(task: TaskConfig, df: pd.DataFrame, model_id: str):
     train_data = train_df.iloc[train_idx]
     test_data = train_df.iloc[test_idx]
 
-        model = smf.ols(formula=formula, data=train_data)
+    # Fit model
+    model = smf.ols(formula=formula, data=train_data)
     res = model.fit()
 
     # --- Robust prediction step to avoid Patsy category mismatches ---
