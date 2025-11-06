@@ -653,7 +653,7 @@ st.markdown(
     "to simulate how a **Reinforcement Learning Teacher** can train an **Agentic AI "
     "Student** to choose econometric models and reason about agrifood policy trade-offs.\n\n"
     "- **Teacher**: decides which agrifood learning module and difficulty level to present  \n"
-    "- **Student (gpt-4o-mini)**: selects an econometric model (pool / FE / DID / ECM) and explains it  \n"
+    "- **Student **: selects an econometric model (pool / FE / DID / ECM) and explains it  \n"
     "- **Workbench**: estimates the model on your real panel and computes a reward that blends "
     "statistical fit, sign priors, and a **GHG vs income policy constraint**  \n"
     "- **Logger**: writes each episode to `rl_teacher_episodes.csv` so you can train a proper RL "
@@ -765,7 +765,7 @@ with st.expander("Task dataset (sample)", expanded=False):
 with st.expander("Summary statistics (y and x)", expanded=False):
     st.write(task_df[[task.y_var] + task.x_main].describe())
 
-st.subheader("4. Agentic AI Student (gpt-4o-mini) & Teacher Reward")
+st.subheader("4. Agentic AI Student & Teacher Reward")
 
 if st.button("Run Student Agent & Evaluate Episode", type="primary"):
     with st.spinner("Calling gpt-4o-mini as Agentic Student..."):
@@ -828,7 +828,7 @@ if st.button("Run Student Agent & Evaluate Episode", type="primary"):
         st.info("Manual mode: teacher state not auto-updated.")
 
     # Teacher commentary (LLM)
-    with st.expander("Teacher Commentary (gpt-4o-mini)", expanded=False):
+    with st.expander("Teacher Commentary", expanded=False):
         comment = call_teacher_commentary(client, task, model_id, comps, reward)
         st.write(comment)
 else:
