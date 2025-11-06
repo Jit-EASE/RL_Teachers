@@ -649,7 +649,7 @@ st.set_page_config(
 st.title("RL Teacher for Agentic Econometric & Policy AI — Irish Agrifood Systems")
 
 st.markdown(
-    "Designed and Developed by **Shubhojit Bagchi**"
+    "Designed and Developed by **Shubhojit Bagchi** \n"
     "This prototype uses **Copernicus + econometric panel for Ireland (2016–2024)** "
     "to simulate how a **Reinforcement Learning Teacher** can train an **Agentic AI "
     "Student** to choose econometric models and reason about agrifood policy trade-offs.\n\n"
