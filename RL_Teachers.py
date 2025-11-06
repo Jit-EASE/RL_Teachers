@@ -649,14 +649,14 @@ st.set_page_config(
 st.title("RL Teacher for Agentic Econometric & Policy AI — Irish Agrifood Systems")
 
 st.markdown(
-    "This prototype uses your **Copernicus + econometric panel for Ireland (2016–2024)** "
+    "This prototype uses **Copernicus + econometric panel for Ireland (2016–2024)** "
     "to simulate how a **Reinforcement Learning Teacher** can train an **Agentic AI "
     "Student** to choose econometric models and reason about agrifood policy trade-offs.\n\n"
     "- **Teacher**: decides which agrifood learning module and difficulty level to present  \n"
     "- **Student **: selects an econometric model (pool / FE / DID / ECM) and explains it  \n"
     "- **Workbench**: estimates the model on your real panel and computes a reward that blends "
     "statistical fit, sign priors, and a **GHG vs income policy constraint**  \n"
-    "- **Logger**: writes each episode to `rl_teacher_episodes.csv` so you can train a proper RL "
+    "- **Logger**: writes each episode to `rl_teacher_episodes.csv` so user can train a proper RL "
     "teacher policy offline (PPO/DQN/etc.) and later plug it back in.\n"
 )
 
